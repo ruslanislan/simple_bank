@@ -4,14 +4,15 @@ import (
 	"context"
 	"fmt"
 	"testing"
+
 	"github.com/stretchr/testify/require"
 )
 
 func TestTransferTx(t *testing.T) {
 	store := NewStore(testDB)
 
-	account1 := createRandomAccount(t)
-	account2 := createRandomAccount(t)
+	account1 := CreateRandomAccount(t)
+	account2 := CreateRandomAccount(t)
 	fmt.Println(">> before:", account1.Balance, account2.Balance)
 
 	n := 5
@@ -84,7 +85,7 @@ func TestTransferTx(t *testing.T) {
 		diff2 := toAccount.Balance - account2.Balance
 		require.Equal(t, diff1, diff2)
 		require.True(t, diff1 > 0)
-		require.True(t, diff1 % amount == 0)
+		require.True(t, diff1%amount == 0)
 
 		k := int(diff1 / amount)
 		require.True(t, k >= 1 && k <= n)
@@ -113,8 +114,8 @@ func TestTransferTx(t *testing.T) {
 func TestTransferTxDeadlock(t *testing.T) {
 	store := NewStore(testDB)
 
-	account1 := createRandomAccount(t)
-	account2 := createRandomAccount(t)
+	account1 := CreateRandomAccount(t)
+	account2 := CreateRandomAccount(t)
 	fmt.Println(">> before:", account1.Balance, account2.Balance)
 
 	n := 10
@@ -122,7 +123,7 @@ func TestTransferTxDeadlock(t *testing.T) {
 
 	errs := make(chan error)
 
-	for i:= range n {
+	for i := range n {
 
 		fromAccount := account1.ID
 		toAccount := account2.ID
@@ -137,7 +138,7 @@ func TestTransferTxDeadlock(t *testing.T) {
 			ctx := context.Background()
 			_, err := store.TransferTx(ctx, TransferTxParams{
 				FromAccountID: fromAccount,
-				ToAccountID:  toAccount,
+				ToAccountID:   toAccount,
 				Amount:        amount,
 			})
 
