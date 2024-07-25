@@ -27,12 +27,12 @@ func createRandomEntry(t *testing.T, account Account) Entry {
 }
 
 func TestCreateEntry(t *testing.T) {
-	account := CreateRandomAccount(t)
+	account := createRandomAccount(t)
 	createRandomEntry(t, account)
 }
 
 func TestGetEntry(t *testing.T) {
-	account := CreateRandomAccount(t)
+	account := createRandomAccount(t)
 	entry1 := createRandomEntry(t, account)
 
 	entry2, err := testQueries.GetEntry(context.Background(), entry1.ID)
@@ -46,7 +46,7 @@ func TestGetEntry(t *testing.T) {
 }
 
 func TestListEntries(t *testing.T) {
-	account := CreateRandomAccount(t)
+	account := createRandomAccount(t)
 
 	for i := 0; i < 10; i++ {
 		createRandomEntry(t, account)

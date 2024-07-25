@@ -8,7 +8,6 @@ import (
 )
 
 func createRandomTransfer(t *testing.T, accountID1 int64, accountID2 int64) Transfer {
-	
 
 	arg := CreateTransferParams{
 		FromAccountID: accountID1,
@@ -29,14 +28,14 @@ func createRandomTransfer(t *testing.T, accountID1 int64, accountID2 int64) Tran
 }
 
 func TestCreateTransfer(t *testing.T) {
-	account1 := CreateRandomAccount(t)
-	account2 := CreateRandomAccount(t)
+	account1 := createRandomAccount(t)
+	account2 := createRandomAccount(t)
 	createRandomTransfer(t, account1.ID, account2.ID)
 }
 
 func TestGetTransfer(t *testing.T) {
-	account1 := CreateRandomAccount(t)
-	account2 := CreateRandomAccount(t)
+	account1 := createRandomAccount(t)
+	account2 := createRandomAccount(t)
 	transfer := createRandomTransfer(t, account1.ID, account2.ID)
 
 	anotherTransfer, err := testQueries.GetTransfer(
@@ -54,8 +53,8 @@ func TestGetTransfer(t *testing.T) {
 }
 
 func TestListTransfers(t *testing.T) {
-	account1 := CreateRandomAccount(t)
-	account2 := CreateRandomAccount(t)
+	account1 := createRandomAccount(t)
+	account2 := createRandomAccount(t)
 
 	for i := 0; i < 10; i++ {
 		createRandomTransfer(t, account1.ID, account2.ID)
