@@ -129,8 +129,6 @@ func TestTransferTxDeadlock(t *testing.T) {
 		toAccount := account2.ID
 
 		if i%2 == 1 {
-			// fromAccount = account2.ID
-			// toAccount = account1.ID
 			fromAccount, toAccount = toAccount, fromAccount
 		}
 
