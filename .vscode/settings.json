@@ -9,5 +9,6 @@
             "username": "root",
             "name": "postgres16"
         }
-    ]
+    ],
+    "makefile.configureOnOpen": false
 }
