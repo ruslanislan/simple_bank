@@ -1,6 +1,6 @@
 module github.com/ruslanislan/simple_bank
 
-go 1.22.5
+go 1.23.1
 
 require (
 	github.com/aead/chacha20poly1305 v0.0.0-20170617001512-233f39982aeb
