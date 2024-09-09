@@ -23,15 +23,15 @@ func TestTransferAPI(t *testing.T) {
 
 	user1, _ := randomUser(t)
 	user2, _ := randomUser(t)
-	user3, _ := randomUser(t)
+	// user3, _ := randomUser(t)
 
 	account1 := randomAccount(user1.Username)
 	account2 := randomAccount(user2.Username)
-	account3 := randomAccount(user3.Username)
+	// account3 := randomAccount(user3.Username)
 
 	account1.Currency = util.USD
 	account2.Currency = util.USD
-	account3.Currency = util.EUR
+	// account3.Currency = util.EUR
 
 	testCases := []struct {
 		name          string
