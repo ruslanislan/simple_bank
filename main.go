@@ -77,13 +77,16 @@ func runGatewayServer(config util.Config, store db.Store) {
 	grpcMux := runtime.NewServeMux(jsonOption)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	err =pb.RegisterSimpleBankHandlerServer(ctx, grpcMux, server)
+	err = pb.RegisterSimpleBankHandlerServer(ctx, grpcMux, server)
 	if err != nil {
 		log.Fatal("cannot register handler server", err)
 	}
 
 	mux := http.NewServeMux()
 	mux.Handle("/", grpcMux)
+
+	fs := http.FileServer(http.Dir("./doc/swagger/"))
+	mux.Handle("/swagger/", http.StripPrefix("/swagger/", fs))
 
 	listener, err := net.Listen("tcp", config.HTTPServerAddress)
 	if err != nil {
